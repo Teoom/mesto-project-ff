@@ -11,13 +11,14 @@ addCardBtn.addEventListener("click", () => {
   popupDisplay(popupNewCard)
 })
 
-const popupClose = getPopupElement(popupNewCard, ".popup__close")
-popupClose.addEventListener("click", () => {
+
+const popupNewCardBtn = getPopupElement(popupNewCard, ".popup__close")
+popupNewCardBtn.addEventListener("click", () => {
   popupDisplay(popupNewCard);
 })
 
-const popupForm = getPopupElement(popupNewCard, ".popup__form")
-popupForm.addEventListener("submit", (evt) => {
+const popupNewCardForm = getPopupElement(popupNewCard, ".popup__form")
+popupNewCardForm.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
   cardList.append(renderCard({ name: evt.target[0].value, link: evt.target[1].value }))
