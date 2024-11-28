@@ -60,7 +60,7 @@ function initCards() {
   })
 }
 
-// Получаем элемент определённого
+// Получаем элемент определённого попапа
 function getPopupElement(parentPopup, className) {
   return parentPopup.querySelector(`${className}`)
 }
