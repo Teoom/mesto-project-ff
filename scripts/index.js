@@ -35,14 +35,17 @@ popupNewCardForm.addEventListener("submit", (evt) => {
 function renderCard(card) {
   const cardItem = cardTemplate.querySelector(".places__item").cloneNode(true);
 
-  // заместо const cardImage = cardItem.children[0]; const cardDeleteBtn = cardItem.children[1]... 
-  const [cardImage, cardDeleteBtn, cardDescription] = cardItem.children;
+  const cardImage = cardItem.querySelector(".card__image")
+  const cardDeleteBtn = cardItem.querySelector(".card__delete-button")
+  const cardTitle = cardItem.querySelector(".card__title")
 
   cardImage.src = card.link;
-  cardDescription.textContent = card.name;
+  cardImage.alt = card.name;
+
+  cardTitle.textContent = card.name;
 
   cardDeleteBtn.addEventListener("click", () => {
-    deleteCard(cardDeleteBtn)
+    deleteCard(cardDeleteBtn.closest(".places__item"))
   })
 
   return cardItem;
@@ -50,7 +53,7 @@ function renderCard(card) {
 
 // Удалене карточки
 function deleteCard(card) {
-  card.parentElement.remove()
+  card.remove()
 }
 
 // Иницилизация карточек
