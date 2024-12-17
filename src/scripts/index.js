@@ -1,8 +1,11 @@
+import '../pages/index.css'
+import '../images/avatar.jpg'
+import '../images/logo.svg'
+import { initialCards } from './cards' 
 
 const cardList = document.querySelector(".places__list");
 const cardTemplate = document.querySelector("#card-template").content;
 initCards()
-
 
 const addCardBtn = document.querySelector(".profile__add-button");
 const popupNewCard = document.querySelector('.popup_type_new-card');
