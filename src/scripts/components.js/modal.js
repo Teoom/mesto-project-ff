@@ -13,7 +13,7 @@ const modal = {
 
     document.body.addEventListener('keydown', modal.keyCloseModal);
   },
-  closeModal(evt) {
+  closeModal() {
     modal.element.classList.remove('popup_is-opened');
     modal.element.classList.add('popup_is-animated');
 
@@ -29,7 +29,7 @@ const modal = {
     }
   },
   overlayCloseModal(evt) {
-    if([...evt.target.classList].includes('popup')) {
+    if(evt.target.classList.contains('popup')) {
       modal.closeModal();
     }
   },

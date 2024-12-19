@@ -1,6 +1,6 @@
 import '../pages/index.css'
 import { initialCards } from './components.js/cards'
-import { renderCard } from './components.js/renderCard'
+import { renderCard } from './components.js/card'
 import modal from './components.js/modal'
 
 const { openModal, closeModal, getFormElements } = modal;
@@ -8,18 +8,37 @@ const { openModal, closeModal, getFormElements } = modal;
 
 const cardList = document.querySelector('.places__list');
 const cardTemplate = document.querySelector('#card-template').content;
-initOfCard('append')
 
+const cardMethods = {
+  deleteCard(card) {
+    card.remove()
+  },
+  toggleLiked(card) {
+    card.classList.toggle('card__like-button_is-active');
+  },
+  openPopupImage(link, name) {
+    const popupImage = document.querySelector('.popup_type_image ');
+
+    const image = popupImage.querySelector('.popup__image');
+    const caption = popupImage.querySelector('.popup__caption');
+
+    image.src = link;
+    image.alt = name;
+    caption.textContent = name;
+
+    openModal(popupImage);
+
+  }
+}
+
+initOfCard('append');
 
 const addCardBtn = document.querySelector('.profile__add-button');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupNewCardForm = popupNewCard.querySelector('.popup__form')
 addCardBtn.addEventListener('click', evt => {
+  popupNewCardForm.reset();
 
-  const formElements = getFormElements(popupNewCardForm);
-  for (let key in formElements) {
-    formElements[key].value = '';
-  }
   openModal(popupNewCard);
 })
 
@@ -31,7 +50,7 @@ popupNewCardForm.addEventListener('submit', evt => {
   cardList.prepend(renderCard(
     cardTemplate,
     { name: formElements['place-name'].value, link: formElements.link.value },
-    cardMethods()))
+    cardMethods))
 
   closeModal();
 })
@@ -64,35 +83,10 @@ popupEditForm.addEventListener('submit', evt => {
 })
 
 
-
 function initOfCard(method) {
   initialCards.forEach(card => {
-    cardList[method](renderCard(cardTemplate, card, cardMethods()));
+    cardList[method](renderCard(cardTemplate, card, cardMethods));
   })
 }
 
-function cardMethods() {
-  return {
-     deleteCard(card) {
-      card.remove()
-    },
-    toggleLiked(card) {
-      card.classList.toggle('card__like-button_is-active');
-    },
-    openPopupImage(link, name) {
-      const popupImage = document.querySelector('.popup_type_image ');
-
-      const image = popupImage.querySelector('.popup__image');
-      const caption = popupImage.querySelector('.popup__caption');
-
-      image.src = link;
-      image.alt = name;
-
-      caption.textContent = name;
-      
-      openModal(popupImage);
-
-    }
-  }
-}
 
