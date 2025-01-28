@@ -6,8 +6,9 @@
   border-radius: 50%;
   background-size: cover;
   background-position: center;
-  background-image: url(../../../images/avatar.jpg);
   margin: 0 29px 0 0;
+  cursor: pointer;
+  position: relative;
 }
 
 @media screen and (max-width: 740px) {
@@ -21,3 +22,23 @@
     margin-right: 0;
   }
 }
+
+.profile__image::before {
+  content: "";
+  opacity: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  display: block;
+  background: rgba(0, 0, 0, .8) url(../../../images/edit-icon.svg) no-repeat center / cover;
+  background-size: 26px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+.profile__image:hover::before {
+  opacity: 1;
+  visibility: visible;
+  transition: visibility .5s, opacity .5s;
+}
+
