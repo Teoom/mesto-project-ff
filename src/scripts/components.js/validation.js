@@ -13,15 +13,15 @@ const validation = {
 
       inputList.forEach(input => {
         input.addEventListener('input', () => {
-          validation.toggleButtonState(form, inputList);
           validation.checkInputValidity(form, input);
+          validation.toggleButtonState(form, inputList);
+         
         })
       })
     })
   },
   toggleButtonState(form, inputList) {
     const submitButton = form.querySelector(validation.validationConfig.submitButtonSelector);
-
     if (validation.hasInvalidInput(inputList)) {
       submitButton.classList.add(validation.validationConfig.inactiveButtonClass);
       submitButton.disabled = true;
