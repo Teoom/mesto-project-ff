@@ -44,6 +44,7 @@ export function renderCard(cardTemplate, card, methods, userId) {
 
   cardLikeBtn.addEventListener('click', () => {
     if (cardLikeBtn.classList.contains('card__like-button_is-active')) {
+  
       methods.deleteLike(card._id)
         .then(card => {
           cardLikeBtn.classList.remove('card__like-button_is-active');

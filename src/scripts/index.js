@@ -48,7 +48,7 @@ addCardBtn.addEventListener('click', () => {
 
 popupNewCardForm.addEventListener('submit', evt => {
   evt.preventDefault();
-  newCardFormButton.textContent = "Сохраняем...";
+  newCardFormButton.textContent = "Сохранение...";
 
   const formElements = getFormElements(popupNewCardForm);
   const newCard = {
