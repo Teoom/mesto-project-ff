@@ -43,12 +43,12 @@ const newCardFormButton = popupNewCardForm.querySelector('.popup__button');
 addCardBtn.addEventListener('click', () => {
   popupNewCardForm.reset();
   clearValidation(popupNewCardForm);
-  newCardFormButton.textContent = "Сохранить"
   openModal(popupNewCard);
 })
 
 popupNewCardForm.addEventListener('submit', evt => {
   evt.preventDefault();
+  newCardFormButton.textContent = "Сохраняем...";
 
   const formElements = getFormElements(popupNewCardForm);
   const newCard = {
@@ -59,13 +59,13 @@ popupNewCardForm.addEventListener('submit', evt => {
   apiMethods.addCard(newCard)
     .then(card => {
       cardList.prepend(renderCard(cardTemplate, card, cardMethods))
+      closeModal();
     })
     .catch(err => {
       console.log(err);
     })
     .finally(() => {
-      newCardFormButton.textContent = "Сохраняем...";
-      closeModal();
+       newCardFormButton.textContent = "Сохранить"
     })
 
 
@@ -85,28 +85,27 @@ profileEditBtn.addEventListener('click', () => {
   const { name, description } = getFormElements(popupEditForm);
   name.value = profileTitle.textContent;
   description.value = profileDescription.textContent;
-
   clearValidation(popupEditForm);
-  editFormButton.textContent = "Сохранить";
   openModal(popupEdit);
 })
 
 
 popupEditForm.addEventListener('submit', evt => {
   evt.preventDefault();
+  editFormButton.textContent = "Сохранение...";
   const { name, description } = getFormElements(popupEditForm);
 
   apiMethods.editUserInfo({ name: name.value, about: description.value })
     .then(userInfo => {
       profileTitle.textContent = userInfo.name;
       profileDescription.textContent = userInfo.about;
+      closeModal();
     })
     .catch(err => {
       console.log(err)
     })
     .finally(() => {
-      editFormButton.textContent = "Сохранение...";
-      closeModal();
+      editFormButton.textContent = "Сохранить";
     })
 
 
@@ -122,25 +121,25 @@ const imageFormButton = profileImageForm.querySelector('.popup__button');
 profileImage.addEventListener('click', () => {
   profileImageForm.reset();
   clearValidation(profileImageForm);
-  imageFormButton.textContent = "Сохранить";
   openModal(popupProfileImage);
 })
 
 profileImageForm.addEventListener('submit', evt => {
   evt.preventDefault();
+  imageFormButton.textContent = "Сохранение...";
 
   const { image } = getFormElements(profileImageForm);
 
   apiMethods.editUserImage(image.value)
     .then(userInfo => {
       profileImage.style.backgroundImage = `url(${userInfo.avatar})`;
+      closeModal();
     })
     .catch(err => {
       console.log(err);
     })
     .finally(() => {
-      imageFormButton.textContent = "Сохранение...";
-      closeModal();
+      imageFormButton.textContent = "Сохранить";
     })
   
 })

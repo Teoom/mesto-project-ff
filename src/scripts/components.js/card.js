@@ -44,18 +44,19 @@ export function renderCard(cardTemplate, card, methods, userId) {
 
   cardLikeBtn.addEventListener('click', () => {
     if (cardLikeBtn.classList.contains('card__like-button_is-active')) {
-      cardLikeBtn.classList.remove('card__like-button_is-active');
       methods.deleteLike(card._id)
         .then(card => {
+          cardLikeBtn.classList.remove('card__like-button_is-active');
           cardLikeCount.textContent = card.likes.length;
         })
         .catch(err => {
           console.log(err);
         })
     } else {
-      cardLikeBtn.classList.add('card__like-button_is-active');
+
       methods.putLike(card._id)
         .then(card => {
+          cardLikeBtn.classList.add('card__like-button_is-active');
           cardLikeCount.textContent = card.likes.length;
         })
         .catch(err => {
